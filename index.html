@@ -1,1217 +1,225 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Primavera Sound · Gorillaz + The Strokes · 28 de noviembre</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Special+Elite&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --coal: #0d0f14;
-      --night: #161a26;
-      --neon: #9dff2e;
-      --purple: #7a2cff;
-      --red: #ff2a2a;
-      --bone: #f1ead8;
-      --dim: #8b8f9c;
-      --display: 'Bowlby One', 'Arial Black', Impact, sans-serif;
-      --type: 'Special Elite', 'Courier New', Courier, monospace;
-      box-sizing: border-box;
-      color-scheme: dark;
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: inherit;
-    }
-
-    html {
-      scroll-padding-top: env(safe-area-inset-top, 0px);
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      background: var(--coal);
-      color: var(--bone);
-      font-family: var(--type);
-      font-size: 1.05rem;
-      line-height: 1.55;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 50;
-      opacity: .12;
-      background: radial-gradient(circle, #fff 0 .6px, transparent .8px) 0 0/5px 5px;
-    }
-
-    button {
-      font: inherit;
-      color: inherit;
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    :focus-visible {
-      outline: 3px solid var(--neon);
-      outline-offset: 3px;
-    }
-
-    section {
-      padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 5vw, 4rem);
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    h1,
-    h2,
-    h3 {
-      font-family: var(--display);
-      font-weight: 400;
-      line-height: .95;
-      margin: 0;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 6vw, 4rem);
-      margin-bottom: 1.5rem;
-    }
-
-    p {
-      max-width: 62ch;
-    }
-
-    /* HERO */
-    .hero {
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 1.5rem;
-      position: relative;
-    }
-
-    .date {
-      font-size: clamp(2.6rem, 13vw, 10rem);
-      white-space: nowrap;
-      line-height: .85;
-      letter-spacing: -.04em;
-      color: var(--bone);
-      position: relative;
-      display: inline-block;
-      margin: 0;
-    }
-
-    .date span {
-      color: var(--red);
-    }
-
-    .glitch {
-      position: relative;
-    }
-
-    .glitch::before,
-    .glitch::after {
-      content: attr(data-t);
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .glitch::before {
-      color: var(--neon);
-      clip-path: inset(0 0 60% 0);
-      transform: translateX(-4px);
-      animation: gl1 4.5s steps(1) infinite;
-    }
-
-    .glitch::after {
-      color: var(--purple);
-      clip-path: inset(55% 0 0 0);
-      transform: translateX(4px);
-      animation: gl2 4.5s steps(1) infinite;
-    }
-
-    @keyframes gl1 {
-
-      0%,
-      90%,
-      100% {
-        opacity: 0;
-      }
-
-      91% {
-        opacity: 1;
-        transform: translate(-6px, 2px);
-      }
-
-      94% {
-        opacity: 1;
-        transform: translate(3px, -2px);
-      }
-
-      96% {
-        opacity: 0;
-      }
-    }
-
-    @keyframes gl2 {
-
-      0%,
-      92%,
-      100% {
-        opacity: 0;
-      }
-
-      93% {
-        opacity: 1;
-        transform: translate(6px, -2px);
-      }
-
-      97% {
-        opacity: 0;
-      }
-    }
-
-    .lead {
-      font-size: clamp(1.05rem, 2.4vw, 1.5rem);
-    }
-
-    .lead b {
-      background: var(--neon);
-      color: var(--coal);
-      padding: 0 .3em;
-      font-weight: 400;
-    }
-
-    .lead i {
-      font-style: normal;
-      border-bottom: 3px solid var(--red);
-    }
-
-    .neon {
-      font-family: var(--display);
-      color: var(--neon);
-      text-shadow: 0 0 12px rgba(157, 255, 46, .7);
-      animation: flick 6s infinite;
-    }
-
-    @keyframes flick {
-
-      0%,
-      18%,
-      22%,
-      62%,
-      100% {
-        opacity: 1;
-      }
-
-      20%,
-      60% {
-        opacity: .35;
-      }
-
-      21% {
-        opacity: .9;
-      }
-    }
-
-    .clock {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(.4rem, 2vw, 1.2rem);
-      max-width: 900px;
-    }
-
-    .cell {
-      background: var(--bone);
-      color: var(--coal);
-      padding: .8rem .3rem 1rem;
-      text-align: center;
-      transform: rotate(-1.2deg);
-      position: relative;
-      clip-path: polygon(0 4%, 6% 0, 14% 3%, 30% 0, 48% 4%, 66% 0, 84% 3%, 100% 0, 100% 96%, 92% 100%, 70% 97%, 48% 100%, 24% 96%, 0 100%);
-    }
-
-    .cell:nth-child(even) {
-      transform: rotate(1deg);
-      background: var(--neon);
-    }
-
-    .cell:nth-child(3) {
-      background: var(--red);
-      color: var(--bone);
-    }
-
-    .num {
-      font-family: var(--display);
-      font-size: clamp(1.8rem, 9.5vw, 6rem);
-      display: block;
-      line-height: 1;
-    }
-
-    .num.tick {
-      animation: pulse .5s ease-out;
-    }
-
-    @keyframes pulse {
-      0% {
-        transform: scale(1.25) rotateX(80deg);
-        opacity: .2;
-      }
-
-      60% {
-        transform: scale(.96);
-      }
-
-      100% {
-        transform: none;
-        opacity: 1;
-      }
-    }
-
-    .lab {
-      font-size: clamp(.65rem, 2vw, 1rem);
-      display: block;
-      margin-top: .2rem;
-    }
-
-    .stagger>* {
-      opacity: 0;
-      transform: translateY(24px);
-      animation: rise .7s cubic-bezier(.2, .8, .2, 1) forwards;
-    }
-
-    .stagger>*:nth-child(1) {
-      animation-delay: .1s;
-    }
-
-    .stagger>*:nth-child(2) {
-      animation-delay: .25s;
-    }
-
-    .stagger>*:nth-child(3) {
-      animation-delay: .4s;
-    }
-
-    .stagger>*:nth-child(4) {
-      animation-delay: .55s;
-    }
-
-    .stagger>*:nth-child(5) {
-      animation-delay: .7s;
-    }
-
-    @keyframes rise {
-      to {
-        opacity: 1;
-        transform: none;
-      }
-    }
-
-    /* TRIVIA */
-    .trivia {
-      background: var(--night);
-      border: 3px solid var(--bone);
-      box-shadow: 10px 10px 0 var(--purple);
-      padding: clamp(1.2rem, 4vw, 2.5rem);
-      position: relative;
-      margin-bottom: 2rem;
-    }
-
-    .hud {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      color: var(--dim);
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .bar {
-      height: 8px;
-      background: #2a2f40;
-      margin-bottom: 1.5rem;
-      overflow: hidden;
-    }
-
-    .bar i {
-      display: block;
-      height: 100%;
-      width: 0;
-      background: var(--neon);
-      transition: width .4s ease;
-    }
-
-    .q {
-      font-size: clamp(1.2rem, 3vw, 1.8rem);
-      margin: 0 0 1.2rem;
-      font-family: var(--display);
-      line-height: 1.15;
-    }
-
-    .opts {
-      display: grid;
-      gap: .7rem;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    }
-
-    .opt {
-      background: transparent;
-      border: 2px solid var(--bone);
-      padding: .9rem 1rem;
-      min-height: 48px;
-      text-align: left;
-      transition: transform .15s, background .15s, box-shadow .15s;
-    }
-
-    .opt:hover:not(:disabled) {
-      background: var(--bone);
-      color: var(--coal);
-      transform: translate(-3px, -3px);
-      box-shadow: 4px 4px 0 var(--red);
-    }
-
-    .opt:disabled {
-      cursor: default;
-      pointer-events: none;
-      opacity: .75;
-    }
-
-    .opt.ok {
-      background: var(--neon);
-      color: var(--coal);
-      border-color: var(--neon);
-      opacity: 1;
-      animation: pulse .5s;
-    }
-
-    .opt.bad {
-      background: var(--red);
-      color: var(--bone);
-      border-color: var(--red);
-      opacity: 1;
-      animation: shake .4s;
-    }
-
-    @keyframes shake {
-      25% {
-        transform: translateX(-8px);
-      }
-
-      75% {
-        transform: translateX(8px);
-      }
-    }
-
-    .fb {
-      min-height: 3.2rem;
-      margin: 1.2rem 0 .5rem;
-      font-size: 1.1rem;
-    }
-
-    .fb.ok {
-      color: var(--neon);
-    }
-
-    .fb.bad {
-      color: var(--red);
-    }
-
-    .btn {
-      background: var(--red);
-      color: var(--bone);
-      border: 2px solid var(--bone);
-      padding: .8rem 1.4rem;
-      min-height: 48px;
-      font-family: var(--display);
-      font-size: 1rem;
-      box-shadow: 5px 5px 0 var(--bone);
-      transition: transform .15s, box-shadow .15s;
-    }
-
-    .btn:hover {
-      transform: translate(2px, 2px);
-      box-shadow: 3px 3px 0 var(--bone);
-    }
-
-    .btn[hidden] {
-      display: none;
-    }
-
-    .result h3 {
-      font-size: clamp(2rem, 7vw, 4rem);
-      color: var(--neon);
-      margin: .5rem 0 1rem;
-    }
-
-    .score {
-      font-family: var(--display);
-      font-size: clamp(3rem, 12vw, 7rem);
-      line-height: 1;
-    }
-
-    /* PREMIOS */
-    .prize {
-      margin-top: 2.5rem;
-      border: 3px dashed var(--neon);
-      padding: clamp(1rem, 3vw, 2rem);
-    }
-
-    #prize-st {
-      border-color: var(--red);
-    }
-
-    .prize h3 {
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      margin-bottom: .8rem;
-    }
-
-    .walls {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-      margin-top: 1.2rem;
-    }
-
-    .walls figure {
-      margin: 0;
-    }
-
-    .walls canvas {
-      width: 100%;
-      height: auto;
-      display: block;
-      border: 2px solid var(--bone);
-      margin-bottom: .8rem;
-      background: #000;
-    }
-
-    .walls .btn {
-      font-size: .85rem;
-      padding: .6rem 1rem;
-    }
-
-    /* LINEUP */
-    .cards {
-      display: grid;
-      gap: clamp(1rem, 3vw, 2rem);
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-    }
-
-    .card {
-      position: relative;
-      min-height: 520px;
-      border: 3px solid var(--bone);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.5rem;
-      isolation: isolate;
-    }
-
-    .card .art {
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      transition: filter .5s, transform .6s;
-    }
-
-    .card h3 {
-      font-size: clamp(2.4rem, 8vw, 4.5rem);
-      margin-bottom: .8rem;
-      text-shadow: 3px 3px 0 var(--coal);
-    }
-
-    .gz .art {
-      background:
-        radial-gradient(circle at 70% 30%, var(--neon) 0 14%, transparent 15%),
-        radial-gradient(circle at 70% 30%, var(--coal) 0 6%, transparent 7%),
-        radial-gradient(circle at 30% 70%, #fff 0 3%, transparent 4%),
-        linear-gradient(160deg, #2b0a5e, var(--purple) 55%, #0f3d1a);
-    }
-
-    .gz:hover .art,
-    .gz:focus-within .art {
-      filter: hue-rotate(110deg) saturate(1.6);
-      transform: scale(1.06);
-    }
-
-    .st .art {
-      background:
-        repeating-linear-gradient(90deg, #fff 0 2px, transparent 2px 22px),
-        linear-gradient(#111, #111);
-      filter: grayscale(1) contrast(1.6);
-    }
-
-    .st .art::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 40%, transparent 0 20%, #000 75%);
-    }
-
-    .st:hover .art,
-    .st:focus-within .art {
-      background: repeating-linear-gradient(90deg, var(--red) 0 2px, transparent 2px 22px), #111;
-      filter: none;
-    }
-
-    .st h3 {
-      color: var(--bone);
-    }
-
-    .gz h3 {
-      color: var(--neon);
-    }
-
-    .discs {
-      display: flex;
-      gap: .8rem;
-      flex-wrap: wrap;
-      margin: 1rem 0;
-    }
-
-    .disc {
-      width: 92px;
-      height: 92px;
-      border: 2px solid var(--bone);
-      display: grid;
-      place-items: center;
-      text-align: center;
-      font-size: .72rem;
-      line-height: 1.15;
-      padding: .3rem;
-      background: var(--coal);
-      transition: transform .25s;
-    }
-
-    .disc:hover {
-      transform: rotate(-6deg) scale(1.08);
-    }
-
-    .gz .disc {
-      background: conic-gradient(from 30deg, var(--purple), var(--neon), var(--coal), var(--purple));
-    }
-
-    .gz .disc span {
-      background: var(--coal);
-      padding: .1rem .25rem;
-    }
-
-    .st .disc {
-      background: var(--bone);
-      color: var(--coal);
-    }
-
-    .st .disc:nth-child(2) {
-      background: var(--red);
-      color: var(--bone);
-    }
-
-    .play {
-      align-self: flex-start;
-      background: var(--bone);
-      color: var(--coal);
-      border: 2px solid var(--coal);
-      padding: .6rem 1rem;
-      min-height: 48px;
-      box-shadow: 4px 4px 0 var(--red);
-      transition: transform .15s, background .15s;
-    }
-
-    .play:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 6px 6px 0 var(--red);
-    }
-
-    .play[aria-pressed="true"] {
-      background: var(--neon);
-      color: var(--coal);
-    }
-
-    .note {
-      color: var(--dim);
-      font-size: .85rem;
-      margin-top: .6rem;
-    }
-
-    .day {
-      font-family: var(--display);
-      font-size: 1.2rem;
-      background: var(--bone);
-      color: var(--coal);
-      display: inline-block;
-      padding: .2rem .6rem;
-      margin: 0 0 .8rem;
-      transform: rotate(-1.5deg);
-      align-self: flex-start;
-    }
-
-    .gz .day {
-      background: var(--neon);
-    }
-
-    .st .day {
-      background: var(--red);
-      color: var(--bone);
-    }
-
-    footer {
-      padding: 2rem clamp(1rem, 5vw, 4rem);
-      color: var(--dim);
-      border-top: 2px dashed #333;
-      text-align: center;
-      font-size: .85rem;
-    }
-
-    @media (max-width: 560px) {
-      .card {
-        min-height: 480px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-
-      .stagger>* {
-        opacity: 1;
-        transform: none;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header class="hero">
-    <section class="stagger" style="width: 100%;">
-      <p class="neon" style="margin:0;font-size:clamp(1rem,3vw,1.6rem)">Primavera Sound</p>
-      <h1 class="date glitch" data-t="28-29.11">28<span>-</span>29<span>.</span>11</h1>
-      <p class="lead"><b>Gorillaz</b> toca el sábado 28 y <i>The Strokes</i> el domingo 29. Para Gorillaz faltan:</p>
-      <div class="clock" role="timer" aria-live="off" id="clock">
-        <div class="cell"><span class="num" id="d">00</span><span class="lab">días</span></div>
-        <div class="cell"><span class="num" id="h">00</span><span class="lab">horas</span></div>
-        <div class="cell"><span class="num" id="m">00</span><span class="lab">minutos</span></div>
-        <div class="cell"><span class="num" id="s">00</span><span class="lab">segundos</span></div>
-      </div>
-      <p class="lead" id="st-left">The Strokes: calculando…</p>
-    </section>
-  </header>
-
-  <main>
-    <section id="trivia-gz">
-      <h2>Trivia Gorillaz<br>Sábado 28</h2>
-      <div class="trivia" id="game-gz"></div>
-      <div class="prize" id="prize-gz" hidden></div>
-    </section>
-
-    <section id="trivia-st">
-      <h2>Trivia The Strokes<br>Domingo 29</h2>
-      <div class="trivia" id="game-st"></div>
-      <div class="prize" id="prize-st" hidden></div>
-    </section>
-
-    <section id="lineup">
-      <h2>Dos bandas, dos ruidos</h2>
-      <div class="cards">
-        <article class="card gz">
-          <div class="art"></div>
-          <h3>Gorillaz</h3>
-          <p class="day">Sábado 28 de noviembre</p>
-          <p>Cuatro personajes de cómic, un colectivo real detrás y una banda que mezcla hip hop, pop y electrónica.
-            Pasa el cursor para cambiar el tono.</p>
-          <div class="discs" aria-label="Discos icónicos de Gorillaz">
-            <div class="disc"><span>Gorillaz<br>2001</span></div>
-            <div class="disc"><span>Demon Days<br>2005</span></div>
-            <div class="disc"><span>Plastic Beach<br>2010</span></div>
-          </div>
-          <button type="button" class="play" data-band="gz" aria-pressed="false">Escuchar boceto de bajo y
-            sinte</button>
-        </article>
-        <article class="card st">
-          <div class="art"></div>
-          <h3>The Strokes</h3>
-          <p class="day">Domingo 29 de noviembre</p>
-          <p>Nueva York, guitarras que se entrelazan y voz filtrada como si saliera de un cassette. Pasa el cursor y el
-            blanco y negro se vuelve rojo.</p>
-          <div class="discs" aria-label="Discos icónicos de The Strokes">
-            <div class="disc"><span>Is This It<br>2001</span></div>
-            <div class="disc"><span>Room on Fire<br>2003</span></div>
-            <div class="disc"><span>The New Abnormal<br>2020</span></div>
-          </div>
-          <button type="button" class="play" data-band="st" aria-pressed="false">Escuchar boceto de guitarras</button>
-        </article>
-      </div>
-      <p class="note">Los bocetos de audio son loops sintetizados en tu navegador, inspirados en el estilo de cada
-        banda. No son fragmentos de sus canciones. Las portadas son ilustraciones propias, no las originales.</p>
-    </section>
-  </main>
-
-  <footer>Proyecto de fans, sin afiliación con Primavera Sound, Gorillaz ni The Strokes. Confirma el cartel y los
-    horarios en los canales oficiales del festival.</footer>
-
-  <script>
-    (() => {
-      'use strict';
-
-      /* ---------- 1. COUNTDOWN ENGINE ---------- */
-      const targetGz = new Date(2026, 10, 28, 0, 0, 0); // 28 nov 2026
-      const targetSt = new Date(2026, 10, 29, 0, 0, 0); // 29 nov 2026
-
-      const els = {
-        d: document.getElementById('d'),
-        h: document.getElementById('h'),
-        m: document.getElementById('m'),
-        s: document.getElementById('s'),
-        stLeft: document.getElementById('st-left')
-      };
-
-      function pad(n) {
-        return String(n).padStart(2, '0');
-      }
-
-      function setNum(el, v) {
-        if (!el) return;
-        const t = pad(v);
-        if (el.textContent !== t) {
-          el.textContent = t;
-          el.classList.remove('tick');
-          void el.offsetWidth; // Forzar reflow para reiniciar animación CSS
-          el.classList.add('tick');
-        }
-      }
-
-      function updateClocks() {
-        const now = new Date();
-
-        // Reloj Gorillaz
-        const diffGz = Math.max(0, Math.floor((targetGz - now) / 1000));
-        setNum(els.d, Math.floor(diffGz / 86400));
-        setNum(els.h, Math.floor((diffGz % 86400) / 3600));
-        setNum(els.m, Math.floor((diffGz % 3600) / 60));
-        setNum(els.s, diffGz % 60);
-
-        // Reloj The Strokes
-        if (els.stLeft) {
-          const diffSt = Math.max(0, Math.floor((targetSt - now) / 1000));
-          const dSt = Math.floor(diffSt / 86400);
-          const hSt = pad(Math.floor((diffSt % 86400) / 3600));
-          const mSt = pad(Math.floor((diffSt % 3600) / 60));
-          const sSt = pad(diffSt % 60);
-          els.stLeft.innerHTML = `<i>The Strokes</i> el 29: ${dSt} días, ${hSt}:${mSt}:${sSt}`;
-        }
-      }
-
-      updateClocks();
-      setInterval(updateClocks, 1000);
-
-      /* ---------- 2. TRIVIA ENGINE ---------- */
-      const BANDS = {
-        gz: {
-          label: 'Gorillaz',
-          ranks: [
-            [10, 'Murdoc te debe un favor'],
-            [8, 'Residente de Kong Studios'],
-            [7, 'Fan de Plastic Beach'],
-            [4, 'Visitante de Kong'],
-            [0, 'Todavía no sales de la isla']
-          ],
-          qs: [
-            {q: '¿En qué año salió el primer álbum de Gorillaz?', o: ['1998', '2001', '2005', '2010'], a: 1, ok: 'Arrancó con el cambio de siglo. Correcto.', no: 'Fue en 2001.'},
-            {q: '¿Qué single de Demon Days tiene a De La Soul como invitados?', o: ['Clint Eastwood', 'Dare', 'Feel Good Inc.', 'Rhinestone Eyes'], a: 2, ok: 'Ese bajo no se olvida. Punto.', no: 'Era Feel Good Inc.'},
-            {q: '¿Cómo se llama el bajista ficticio de Gorillaz?', o: ['2D', 'Russel', 'Noodle', 'Murdoc Niccals'], a: 3, ok: 'Murdoc aprueba tu respuesta, con mala cara.', no: 'Murdoc Niccals.'},
-            {q: '¿Quién toca la batería en la banda ficticia?', o: ['Russel Hobbs', 'Murdoc', 'Noodle', '2D'], a: 0, ok: 'Russel marca el ritmo. Correcto.', no: 'Es Russel Hobbs.'},
-            {q: '¿Qué instrumento toca Noodle?', o: ['Teclado', 'Guitarra', 'Violín', 'Bajo'], a: 1, ok: 'Noodle estaría orgullosa.', no: 'Noodle toca la guitarra.'},
-            {q: '¿Qué rasgo distingue a 2D?', o: ['Pelo azul y ojos completamente negros', 'Una máscara', 'Un solo brazo', 'Orejas de gorila'], a: 0, ok: 'Ojos negros y mala suerte con los golpes.', no: '2D tiene el pelo azul y los ojos negros, sin pupilas.'},
-            {q: '¿Qué álbum de 2010 imagina una isla hecha de basura plástica?', o: ['Humanz', 'Plastic Beach', 'The Fall', 'D-Sides'], a: 1, ok: 'Isla confirmada.', no: 'Era Plastic Beach.'},
-            {q: '¿Cuál es el álbum de Gorillaz de 2023?', o: ['Cracker Island', 'Humanz', 'The Now Now', 'Demon Days'], a: 0, ok: 'Estás al día.', no: 'Cracker Island salió en 2023.'},
-            {q: '¿Qué proyecto de 2020 salió por episodios con invitados distintos?', o: ['Humanz', 'Song Machine', 'Plastic Beach', 'The Now Now'], a: 1, ok: 'Un episodio tras otro. Bien.', no: 'Fue Song Machine.'},
-            {q: '¿En qué banda británica cantaba Damon Albarn antes de Gorillaz?', o: ['Oasis', 'Suede', 'Blur', 'Pulp'], a: 2, ok: 'Blur, por supuesto.', no: 'Era el cantante de Blur.'}
-          ]
-        },
-        st: {
-          label: 'The Strokes',
-          ranks: [
-            [10, 'Sexto Stroke honorario'],
-            [8, 'Rey del garaje de Nueva York'],
-            [7, 'Fan de Is This It'],
-            [4, 'Oyente de cassette'],
-            [0, 'Aún en la fila del bar']
-          ],
-          qs: [
-            {q: '¿En qué año salió “Is This It”?', o: ['1999', '2001', '2003', '2006'], a: 1, ok: 'Garaje neoyorquino puro.', no: 'Fue en 2001.'},
-            {q: '¿Quién canta en The Strokes?', o: ['Julian Casablancas', 'Alex Turner', 'Brandon Flowers', 'Damon Albarn'], a: 0, ok: 'Voz filtrada, actitud de hastío.', no: 'Es Julian Casablancas.'},
-            {q: '¿De qué ciudad es la banda?', o: ['Londres', 'Los Ángeles', 'Detroit', 'Nueva York'], a: 3, ok: 'Nueva York, claro.', no: 'Nueva York.'},
-            {q: '¿Cómo se llama su álbum de 2020?', o: ['Angles', 'The New Abnormal', 'Comedown Machine', 'Room on Fire'], a: 1, ok: 'Ganó el Grammy a mejor álbum de rock.', no: 'The New Abnormal.'},
-            {q: '¿Cuál fue su segundo álbum, de 2003?', o: ['Angles', 'First Impressions of Earth', 'Room on Fire', 'Is This It'], a: 2, ok: 'Segundo disco, mismo ruido.', no: 'Room on Fire.'},
-            {q: '¿Quién es el guitarrista rítmico?', o: ['Nick Valensi', 'Albert Hammond Jr.', 'Nikolai Fraiture', 'Fabrizio Moretti'], a: 1, ok: 'Albert Hammond Jr., correcto.', no: 'Albert Hammond Jr.'},
-            {q: '¿Quién toca la batería?', o: ['Fabrizio Moretti', 'Nikolai Fraiture', 'Nick Valensi', 'Julian Casablancas'], a: 0, ok: 'Fabrizio Moretti, correcto.', no: 'Fabrizio Moretti.'},
-            {q: '¿Quién toca el bajo?', o: ['Albert Hammond Jr.', 'Nick Valensi', 'Nikolai Fraiture', 'Fabrizio Moretti'], a: 2, ok: 'Nikolai Fraiture. Bien.', no: 'Nikolai Fraiture.'},
-            {q: '¿De qué álbum es “Last Nite”?', o: ['Is This It', 'Angles', 'The New Abnormal', 'Comedown Machine'], a: 0, ok: 'Hit del debut.', no: 'Es de Is This It.'},
-            {q: '¿Qué álbum de The Strokes salió en 2006?', o: ['Angles', 'First Impressions of Earth', 'Room on Fire', 'Future Present Past'], a: 1, ok: 'Disco largo y ambicioso.', no: 'First Impressions of Earth.'}
-          ]
-        }
-      };
-
-      const WIN_SCORE = 7;
-
-      function initGame(band) {
-        const B = BANDS[band];
-        const QS = B.qs;
-        const box = document.getElementById('game-' + band);
-        if (!box) return;
-
-        let i = 0;
-        let score = 0;
-        let locked = false;
-
-        function render() {
-          if (i >= QS.length) return renderResult();
-          const Q = QS[i];
-          box.innerHTML = `
-        <div class="hud"><span>Pregunta ${i + 1} de ${QS.length}</span><span>Puntos: <b class="sc">${score}</b></span></div>
-        <div class="bar"><i style="width:${(i / QS.length) * 100}%"></i></div>
-        <p class="q">${Q.q}</p>
-        <div class="opts">${Q.o.map((t, k) => `<button type="button" class="opt" data-k="${k}">${t}</button>`).join('')}</div>
-        <p class="fb" aria-live="polite"></p>
-        <button type="button" class="btn next" hidden>${i === QS.length - 1 ? 'Ver resultado' : 'Siguiente'}</button>
-      `;
-          locked = false;
-        }
-
-        function renderResult() {
-          const rankTitle = B.ranks.find(x => score >= x[0])[1];
-          const won = score >= WIN_SCORE;
-          box.innerHTML = `
-        <div class="result">
-          <div class="score">${score}/${QS.length}</div>
-          <h3>${rankTitle}</h3>
-          <p>${won ? '¡Ganaste! Abajo tienes tu premio: 3 fondos exclusivos en Full HD.' : `Necesitas al menos ${WIN_SCORE} aciertos para desbloquear el premio. ¡Inténtalo de nuevo!`}</p>
-          <button type="button" class="btn again">Jugar de nuevo</button>
-        </div>
-      `;
-          if (won) showPrize(band);
-        }
-
-        box.addEventListener('click', e => {
-          const optBtn = e.target.closest('.opt');
-          if (optBtn && !locked) {
-            locked = true;
-            const k = Number(optBtn.dataset.k);
-            const Q = QS[i];
-            const fb = box.querySelector('.fb');
-
-            box.querySelectorAll('.opt').forEach(b => {
-              b.disabled = true;
-              if (Number(b.dataset.k) === Q.a) b.classList.add('ok');
-            });
-
-            if (k === Q.a) {
-              score++;
-              fb.textContent = Q.ok;
-              fb.className = 'fb ok';
-              box.querySelector('.sc').textContent = score;
-            } else {
-              optBtn.classList.add('bad');
-              fb.textContent = Q.no;
-              fb.className = 'fb bad';
-            }
-
-            const nextBtn = box.querySelector('.next');
-            nextBtn.hidden = false;
-            nextBtn.focus();
-            return;
-          }
-
-          if (e.target.classList.contains('next')) {
-            i++;
-            render();
-            return;
-          }
-
-          if (e.target.classList.contains('again')) {
-            i = 0;
-            score = 0;
-            const prizeBox = document.getElementById('prize-' + band);
-            if (prizeBox) prizeBox.hidden = true;
-            render();
-          }
-        });
-
-        render();
-      }
-
-      /* ---------- 3. CANVAS WALLPAPER GENERATOR ---------- */
-      const W = 1920, H = 1080;
-      function rng(seed) {
-        let s = seed;
-        return () => (s = s * 16807 % 2147483647) / 2147483647;
-      }
-
-      const ART = {
-        gz1: {
-          name: 'Kong Studios',
-          file: 'gorillaz-kong-studios-1920x1080.png',
-          draw(c) {
-            const g = c.createLinearGradient(0, 0, 0, H);
-            g.addColorStop(0, '#1b0645'); g.addColorStop(.65, '#7a2cff'); g.addColorStop(1, '#9dff2e');
-            c.fillStyle = g; c.fillRect(0, 0, W, H);
-            c.fillStyle = '#9dff2e'; c.beginPath(); c.arc(960, 540, 260, 0, Math.PI * 2); c.fill();
-            c.fillStyle = '#0d0f14';
-            const r = rng(7); let x = 0;
-            while (x < W) {
-              const w = 60 + r() * 90, h = 160 + r() * 330;
-              c.fillRect(x, H - h, w, h);
-              c.fillStyle = '#9dff2e';
-              for (let y = H - h + 20; y < H - 20; y += 40) if (r() > .6) c.fillRect(x + 12, y, 10, 16);
-              c.fillStyle = '#0d0f14';
-              x += w + 8;
-            }
-            c.fillStyle = '#f1ead8'; c.font = '150px "Bowlby One", Impact, sans-serif'; c.textAlign = 'center';
-            c.fillText('KONG STUDIOS', 960, 300);
-            c.font = '56px "Special Elite", monospace'; c.fillText('Sábado 28.11', 960, 380);
-          }
-        },
-        gz2: {
-          name: 'Isla de plástico',
-          file: 'gorillaz-isla-1920x1080.png',
-          draw(c) {
-            const g = c.createLinearGradient(0, 0, 0, H);
-            g.addColorStop(0, '#2b0a5e'); g.addColorStop(1, '#0f3d1a');
-            c.fillStyle = g; c.fillRect(0, 0, W, H);
-            c.fillStyle = '#f1ead8'; c.beginPath(); c.arc(1500, 230, 110, 0, Math.PI * 2); c.fill();
-            c.fillStyle = '#0d0f14'; c.beginPath();
-            c.moveTo(560, 700); c.lineTo(800, 430); c.lineTo(960, 560); c.lineTo(1150, 380); c.lineTo(1400, 700); c.fill();
-            for (let k = 0; k < 7; k++) {
-              c.strokeStyle = k % 2 ? '#9dff2e' : '#7a2cff'; c.lineWidth = 10; c.beginPath();
-              for (let x = 0; x <= W; x += 20) {
-                const y = 700 + k * 55 + Math.sin(x / 90 + k) * 18;
-                x ? c.lineTo(x, y) : c.moveTo(x, y);
-              }
-              c.stroke();
-            }
-            c.fillStyle = '#9dff2e'; c.font = '140px "Bowlby One", Impact, sans-serif'; c.textAlign = 'left';
-            c.fillText('PLASTIC', 90, 200); c.fillText('SKY', 90, 340);
-          }
-        },
-        gz3: {
-          name: 'Ojos negros',
-          file: 'gorillaz-ojos-1920x1080.png',
-          draw(c) {
-            c.fillStyle = '#0d0f14'; c.fillRect(0, 0, W, H);
-            c.strokeStyle = '#9dff2e'; c.lineWidth = 3;
-            for (let k = -20; k <= 20; k++) {c.beginPath(); c.moveTo(960, 520); c.lineTo(960 + k * 180, H); c.stroke();}
-            for (let k = 0; k < 10; k++) {const y = 520 + Math.pow(k / 9, 2) * 560; c.beginPath(); c.moveTo(0, y); c.lineTo(W, y); c.stroke();}
-            [[640, 330], [1280, 330]].forEach(([x, y]) => {
-              c.fillStyle = '#000'; c.beginPath(); c.arc(x, y, 150, 0, Math.PI * 2); c.fill();
-              c.lineWidth = 12; c.strokeStyle = '#f1ead8'; c.stroke();
-              c.fillStyle = '#f1ead8'; c.beginPath(); c.arc(x - 45, y - 50, 26, 0, Math.PI * 2); c.fill();
-            });
-            c.fillStyle = '#7a2cff'; c.font = '120px "Bowlby One", Impact, sans-serif'; c.textAlign = 'center';
-            c.fillText('CRACKER ISLAND', 960, 950);
-          }
-        },
-        st1: {
-          name: '29.11',
-          file: 'the-strokes-29-11-1920x1080.png',
-          draw(c) {
-            c.fillStyle = '#000'; c.fillRect(0, 0, W, H); c.fillStyle = '#fff';
-            for (let x = 0, w = 60; x < W; x += w + 10) {c.fillRect(x, 0, w, H); w = Math.max(4, w - 4);}
-            c.fillStyle = '#ff2a2a'; c.fillRect(380, 250, 1160, 580);
-            c.fillStyle = '#f1ead8'; c.font = '440px "Bowlby One", Impact, sans-serif'; c.textAlign = 'center';
-            c.fillText('29.11', 960, 700);
-            c.font = '64px "Special Elite", monospace'; c.fillText('Domingo', 960, 790);
-          }
-        },
-        st2: {
-          name: 'Nueva York',
-          file: 'the-strokes-nueva-york-1920x1080.png',
-          draw(c) {
-            c.fillStyle = '#000'; c.fillRect(0, 0, W, H); c.fillStyle = '#fff';
-            for (let y = 15; y < H; y += 30) {
-              for (let x = 15; x < W; x += 30) {
-                const d = Math.hypot(x - 960, y - 520), r = Math.max(0, 14 - d / 45);
-                if (r > .5) {c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fill();}
-              }
-            }
-            c.fillStyle = '#ff2a2a'; c.font = '190px "Bowlby One", Impact, sans-serif'; c.textAlign = 'center';
-            c.fillText('NUEVA YORK', 960, 1000);
-          }
-        },
-        st3: {
-          name: 'Medianoche',
-          file: 'the-strokes-medianoche-1920x1080.png',
-          draw(c) {
-            c.fillStyle = '#f1ead8'; c.fillRect(0, 0, W, H);
-            c.fillStyle = '#0d0f14'; c.beginPath(); c.moveTo(W * .45, 0); c.lineTo(W, 0); c.lineTo(W, H); c.lineTo(W * .25, H); c.fill();
-            c.fillStyle = '#ff2a2a'; c.beginPath(); c.arc(1300, 420, 200, 0, Math.PI * 2); c.fill();
-            c.fillStyle = '#0d0f14'; c.font = '130px "Special Elite", monospace'; c.textAlign = 'left';
-            c.fillText('Garaje', 100, 300); c.fillText('a medianoche', 100, 450);
-            c.fillStyle = '#f1ead8'; c.font = '64px "Special Elite", monospace';
-            c.fillText('The Strokes · 29 de noviembre', 900, 950);
-          }
-        }
-      };
-
-      const PRIZES = {gz: ['gz1', 'gz2', 'gz3'], st: ['st1', 'st2', 'st3']};
-
-      async function showPrize(band) {
-        const box = document.getElementById('prize-' + band);
-        if (!box) return;
-        box.hidden = false;
-        box.innerHTML = `
-      <h3>Premio: 3 fondos Full HD</h3>
-      <p>Ilustraciones originales de 1920×1080 px listas para descargar en PNG.</p>
-      <div class="walls">
-        ${PRIZES[band].map(id => `
-          <figure>
-            <canvas width="${W}" height="${H}" data-id="${id}"></canvas>
-            <button type="button" class="btn dl" data-id="${id}">Descargar “${ART[id].name}”</button>
-          </figure>
-        `).join('')}
-      </div>
-    `;
-        try {
-          await Promise.all([
-            document.fonts.load('100px "Bowlby One"'),
-            document.fonts.load('50px "Special Elite"')
-          ]);
-        } catch (e) { }
-        box.querySelectorAll('canvas').forEach(cv => ART[cv.dataset.id].draw(cv.getContext('2d')));
-        box.scrollIntoView({behavior: 'smooth', block: 'center'});
-      }
-
-      document.addEventListener('click', e => {
-        const dlBtn = e.target.closest('.dl');
-        if (!dlBtn) return;
-        const id = dlBtn.dataset.id;
-        const cv = document.querySelector(`canvas[data-id="${id}"]`);
-        if (!cv || !ART[id]) return;
-
-        cv.toBlob(blob => {
-          if (!blob) return;
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = ART[id].file;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          setTimeout(() => URL.revokeObjectURL(url), 1500);
-        }, 'image/png');
-      });
-
-      initGame('gz');
-      initGame('st');
-
-      /* ---------- 4. WEB AUDIO SYNTHESIZER ---------- */
-      let audioCtx = null;
-      let audioTimer = null;
-      let currentBand = null;
-
-      const PATTERNS = {
-        gz: {bpm: 96, steps: [55, 0, 55, 0, 65.4, 0, 49, 0, 55, 0, 73.4, 0, 65.4, 0, 49, 55], wave: 'sawtooth', cutoff: 600},
-        st: {bpm: 132, steps: [329.6, 392, 493.9, 392, 329.6, 392, 440, 392, 293.7, 370, 440, 370, 293.7, 370, 493.9, 370], wave: 'triangle', cutoff: 2600}
-      };
-
-      function stopAudio() {
-        if (audioTimer) {
-          clearInterval(audioTimer);
-          audioTimer = null;
-        }
-        document.querySelectorAll('.play').forEach(b => b.setAttribute('aria-pressed', 'false'));
-        currentBand = null;
-      }
-
-      function startAudio(band) {
-        try {
-          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-          if (!AudioContextClass) return;
-          if (!audioCtx) audioCtx = new AudioContextClass();
-          if (audioCtx.state === 'suspended') audioCtx.resume();
-
-          const P = PATTERNS[band];
-          let stepIndex = 0;
-          const dur = 60 / P.bpm / 2;
-
-          const playStep = () => {
-            if (!audioCtx) return;
-            const freq = P.steps[stepIndex++ % P.steps.length];
-            if (freq) {
-              const now = audioCtx.currentTime;
-              const osc = audioCtx.createOscillator();
-              const gain = audioCtx.createGain();
-              const filter = audioCtx.createBiquadFilter();
-
-              osc.type = P.wave;
-              osc.frequency.setValueAtTime(freq, now);
-
-              filter.type = 'lowpass';
-              filter.frequency.setValueAtTime(P.cutoff, now);
-
-              gain.gain.setValueAtTime(0.0001, now);
-              gain.gain.exponentialRampToValueAtTime(0.16, now + 0.015);
-              gain.gain.exponentialRampToValueAtTime(0.0001, now + dur * 0.92);
-
-              osc.connect(filter);
-              filter.connect(gain);
-              gain.connect(audioCtx.destination);
-
-              osc.start(now);
-              osc.stop(now + dur);
-              osc.onended = () => {
-                osc.disconnect();
-                filter.disconnect();
-                gain.disconnect();
-              };
-            }
-          };
-
-          playStep();
-          audioTimer = setInterval(playStep, dur * 1000);
-          currentBand = band;
-
-          const activeBtn = document.querySelector(`.play[data-band="${band}"]`);
-          if (activeBtn) activeBtn.setAttribute('aria-pressed', 'true');
-        } catch (err) {
-          console.error('Error al iniciar Web Audio API:', err);
-        }
-      }
-
-      document.querySelectorAll('.play').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const band = btn.dataset.band;
-          const isSame = currentBand === band;
-          stopAudio();
-          if (!isSame) startAudio(band);
-        });
-      });
-
-      // Pausar sintetizador si el usuario cambia de pestaña
-      document.addEventListener('visibilitychange', () => {
-        if (document.hidden && currentBand) stopAudio();
-      });
-    })();
-  </script>
-</body>
-
-</html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Primavera Sound · Gorillaz + The Strokes · 28-29 de noviembre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root {
+  --coal: #0d0f14;
+  --night: #161a26;
+  --neon: #9dff2e;
+  --purple: #7a2cff;
+  --red: #ff2a2a;
+  --bone: #f1ead8;
+  --dim: #8b8f9c;
+  --display: 'Bowlby One', 'Arial Black', Impact, sans-serif;
+  --type: 'Special Elite', 'Courier New', Courier, monospace;
+  box-sizing: border-box;
+  color-scheme: dark;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* MODOS VISUALES (IDEA 6) */
+body[data-theme="kong"] {
+  --coal: #050a04;
+  --night: #0b1709;
+  --neon: #b4ff39;
+  --purple: #9d4edd;
+  --red: #00f5d4;
+  --bone: #e2f1d5;
+}
+body[data-theme="kong"]::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.38) 0px, rgba(0,0,0,0.38) 2px, transparent 2px, transparent 4px);
+}
+body[data-theme="nyc"] {
+  --coal: #050505;
+  --night: #121212;
+  --neon: #ffffff;
+  --purple: #ff2a2a;
+  --red: #ff2a2a;
+  --bone: #f7f4eb;
+  filter: contrast(1.08);
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: 4rem; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--coal);
+  color: var(--bone);
+  font-family: var(--type);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: .12;
+  background: radial-gradient(circle, #fff 0 .6px, transparent .8px) 0 0/5px 5px;
+}
+button, input, select { font: inherit; color: inherit; touch-action: manipulation; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--neon); outline-offset: 3px; }
+section { padding: clamp(2.8rem, 7vw, 5.5rem) clamp(1rem, 5vw, 4rem); max-width: 1200px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: .95; margin: 0; }
+h2 { font-size: clamp(2rem, 6vw, 3.8rem); margin-bottom: 1.2rem; }
+p { max-width: 65ch; }
+
+/* BARRA SUPERIOR DE NAVEGACIÓN Y TEMAS */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 55;
+  background: rgba(13, 15, 20, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--bone);
+  padding: .6rem clamp(1rem, 4vw, 2.5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.nav-links { display: flex; gap: .8rem; flex-wrap: wrap; font-size: .85rem; }
+.nav-links a { color: var(--bone); text-decoration: none; padding: .2rem .5rem; border: 1px solid transparent; }
+.nav-links a:hover { border-color: var(--neon); color: var(--neon); }
+.theme-switch { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
+.theme-btn {
+  background: var(--night);
+  border: 2px solid var(--bone);
+  padding: .3rem .65rem;
+  font-size: .78rem;
+  transition: transform .15s, background .15s;
+}
+.theme-btn[aria-pressed="true"] { background: var(--neon); color: var(--coal); border-color: var(--neon); font-weight: bold; }
+
+/* HERO */
+.hero { min-height: 92svh; display: flex; flex-direction: column; justify-content: center; gap: 1.5rem; position: relative; }
+.date {
+  font-size: clamp(2.6rem, 13vw, 10rem);
+  white-space: nowrap;
+  line-height: .85;
+  letter-spacing: -.04em;
+  color: var(--bone);
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+.date span { color: var(--red); }
+.glitch { position: relative; }
+.glitch::before, .glitch::after { content: attr(data-t); position: absolute; inset: 0; pointer-events: none; }
+.glitch::before { color: var(--neon); clip-path: inset(0 0 60% 0); transform: translateX(-4px); animation: gl1 4.5s steps(1) infinite; }
+.glitch::after { color: var(--purple); clip-path: inset(55% 0 0 0); transform: translateX(4px); animation: gl2 4.5s steps(1) infinite; }
+@keyframes gl1 { 0%, 90%, 100% { opacity: 0; } 91% { opacity: 1; transform: translate(-6px, 2px); } 94% { opacity: 1; transform: translate(3px, -2px); } 96% { opacity: 0; } }
+@keyframes gl2 { 0%, 92%, 100% { opacity: 0; } 93% { opacity: 1; transform: translate(6px, -2px); } 97% { opacity: 0; } }
+.lead { font-size: clamp(1.05rem, 2.4vw, 1.5rem); }
+.lead b { background: var(--neon); color: var(--coal); padding: 0 .3em; font-weight: 400; }
+.lead i { font-style: normal; border-bottom: 3px solid var(--red); }
+.neon { font-family: var(--display); color: var(--neon); text-shadow: 0 0 12px rgba(157, 255, 46, .7); animation: flick 6s infinite; }
+@keyframes flick { 0%, 18%, 22%, 62%, 100% { opacity: 1; } 20%, 60% { opacity: .35; } 21% { opacity: .9; } }
+.clock { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.4rem, 2vw, 1.2rem); max-width: 900px; }
+.cell {
+  background: var(--bone);
+  color: var(--coal);
+  padding: .8rem .3rem 1rem;
+  text-align: center;
+  transform: rotate(-1.2deg);
+  position: relative;
+  clip-path: polygon(0 4%, 6% 0, 14% 3%, 30% 0, 48% 4%, 66% 0, 84% 3%, 100% 0, 100% 96%, 92% 100%, 70% 97%, 48% 100%, 24% 96%, 0 100%);
+}
+.cell:nth-child(even) { transform: rotate(1deg); background: var(--neon); }
+.cell:nth-child(3) { background: var(--red); color: var(--bone); }
+.num { font-family: var(--display); font-size: clamp(1.8rem, 9.5vw, 6rem); display: block; line-height: 1; }
+.num.tick { animation: pulse .5s ease-out; }
+@keyframes pulse { 0% { transform: scale(1.25) rotateX(80deg); opacity: .2; } 60% { transform: scale(.96); } 100% { transform: none; opacity: 1; } }
+.lab { font-size: clamp(.65rem, 2vw, 1rem); display: block; margin-top: .2rem; }
+.stagger > * { opacity: 0; transform: translateY(24px); animation: rise .7s cubic-bezier(.2, .8, .2, 1) forwards; }
+.stagger > *:nth-child(1) { animation-delay: .1s; }
+.stagger > *:nth-child(2) { animation-delay: .25s; }
+.stagger > *:nth-child(3) { animation-delay: .4s; }
+.stagger > *:nth-child(4) { animation-delay: .55s; }
+.stagger > *:nth-child(5) { animation-delay: .7s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* PANELES GENERALES Y BOTONES */
+.box-panel {
+  background: var(--night);
+  border: 3px solid var(--bone);
+  box-shadow: 10px 10px 0 var(--purple);
+  padding: clamp(1.2rem, 4vw, 2.5rem);
+  position: relative;
+  margin-bottom: 2rem;
+}
+.btn {
+  background: var(--red);
+  color: var(--bone);
+  border: 2px solid var(--bone);
+  padding: .75rem 1.3rem;
+  min-height: 48px;
+  font-family: var(--display);
+  font-size: .95rem;
+  box-shadow: 5px 5px 0 var(--bone);
+  transition: transform .15s, box-shadow .15s, background .15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  text-decoration: none;
+}
+.btn:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--bone); }
+.btn.alt { background: var(--neon); color: var(--coal); box-shadow: 5px 5px 0 var(--red); }
+.btn[hidden] { display: none; }
+
+/* TRIVIA + RIFF */
+.hud { display: flex; justify-content: space-between; gap: 1rem; color: var(--dim); margin-bottom: 1rem; flex-wrap: wrap; }
+.bar { height: 8px; background: #2a2f40; margin-bottom: 1.5rem; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--neon); transition: width .4s ease; }
+.q { font-size: clamp(1.2rem, 3vw, 1.8rem); margin: 0 0 1rem; font-family: var(--display); line-height: 1.15; }
+.riff-btn {
+  margin-bottom: 1.2rem;
+  background: var(--neon);
+  color: var(--coal);
+  border: 2px solid var(--bone);
+  padding: .6rem 1.1rem;
+  font-family: var(--display);
+  box-shadow: 4px 4px 0 var(--purple);
+}
+.opts { display: grid; gap: .7rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.opt {
+  background: transparent;
+  border: 2px solid var(--bone);
+  padding: .9rem 1rem;
+  min-height: 48px;
+  text-align: left;
+  transition: transform .15s, background .15s, box-shadow .15s;
+}
+.opt:hover:not(:disabled) { background: var(--bone); color: var(--coal); transform: translate(-3px, -3px); box-shadow: 4px 4px 0 var(--red); }
+.opt:disabled { cursor: default; pointer-events: none; opacity: .75; }
+.opt.ok { background: var(--neon); color: var(--coal); border-color: var(--neon); opacity: 1; animation: pulse .5s; }
+.opt.bad { background: var(--red); color: var(--bone); border-color: var(--red); opacity: 1; animation: shake .4s; }
+@keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+.fb { min-height: 3.2rem; margin: 1.2rem 0 .5rem; font-size: 1.1rem; }
+.fb.ok { color: var(--neon); }
+.fb.bad { color: var(--red); }
+.result h3 { font-size: clamp(2rem, 7vw, 4rem); color: var(--neon); margin: .5rem 0 1rem; }
+.score { font-family: var(--display); font-size: clamp(3rem, 12vw, 7rem); line-height: 1; }
+
+/* PREMIOS */
+.prize { margin-top: 2.5rem; border: 3px dashed var(--neon); padding: clamp(1rem, 3vw, 2rem); }
+#prize-st { border-color: var(--red); }
+.prize h3 { font-size: clamp(1.8rem
